@@ -19,18 +19,19 @@ class EquiposImport implements ToModel, WithHeadingRow, WithValidation, WithBatc
     {
         return new Equipo([
             'nombre'=> $row['nombre'],
-            'id_colegio'=> $row['id_colegio'],
+            'id_colegio'=> $row['colegio'],
             'cuenta'=> $row['cuenta'],
             'clave'=> $row['clave'],
-            'id_categoria'=> $row['id_categoria']
+            'id_categoria'=> $row['categoria'],
+            'posicion'=> $row['posicion']
         ]);
     }
     public function rules():array
     {
         return [
             'nombre'=> 'required',
-            'id_colegio'=> 'required',
-            'id_categoria'=> 'required'
+            'colegio'=> 'required',
+            'categoria'=> 'required'
         ];
     }
     public function batchSize(): int

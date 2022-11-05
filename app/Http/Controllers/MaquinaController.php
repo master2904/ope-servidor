@@ -64,6 +64,30 @@ class MaquinaController extends Controller
         return $this->inhabilitados($request->id_concurso,$request->id_laboratorio);
         return response()->json($request);
     }
+    public function rango(Request $request){
+        try {
+            $i=0;
+            while($request[$i]!=null){
+                $v=$request[$i];
+                $ans=new Maquina;
+                $ans->id_concurso=$v['id_concurso'];
+                $ans->id_laboratorio=$v['id_laboratorio'];
+                $ans->id_equipo=$v['id_equipo'];
+                $ans->estado=$v['estado'];
+                $ans->numero=$v['numero'];
+                $ans->save();
+                // return response()->json($ans);
+                // Maquina::create($ans);
+                $i++;
+            }
+        }
+        catch (\Exception $exception) {
+            return response()->json(['error' => ''], 400);
+        }        
+        return  response()->json(['status' => 'ok']);
+        // return $this->inhabilitados($request->id_concurso,$request->id_laboratorio);
+        // return response()->json($request);
+    }
     public function alta($id){
         $maquina=Maquina::find($id);
         $maquina->delete();

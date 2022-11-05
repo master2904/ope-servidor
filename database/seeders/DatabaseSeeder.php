@@ -193,12 +193,12 @@ class DatabaseSeeder extends Seeder
 		Categoria::create(array(
 			'titulo'=>'Nivel Basico',
 			'descripcion'=>'Estudiantes de 4to y 5to de Secundaria',
-			'id_concurso'=>'3'
+			'id_concurso'=>'4'
 		));        		
 		Categoria::create(array(
 			'titulo'=>'Nivel Avanzado',
 			'descripcion'=>'Estudiantes de 4to 5to y 6to de Secundaria',
-			'id_concurso'=>'3'
+			'id_concurso'=>'4'
 		));        		
 		Colegio::create(array(
 			'codigo'=>'0',

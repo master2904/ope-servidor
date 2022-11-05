@@ -41,6 +41,7 @@ Route::get('/categoria/maxima/{id}',[CategoriaController::class,'buscar']);
 Route::get('/maquina/buscar/{id}',[MaquinaController::class,'buscar']);
 Route::post('/maquina/conjunto/',[MaquinaController::class,'gen erar']);
 Route::post('/maquina/baja',[MaquinaController::class,'baja']);
+Route::post('/maquina/rango',[MaquinaController::class,'rango']);
 Route::delete('/maquina/alta/{id}',[MaquinaController::class,'alta']);
 Route::get('/maquina/listado/{id}/{idl}',[MaquinaController::class,'inhabilitados']);
 // Route::post('/laboratorio/imagen', [LaboratorioController::class,'subirarchivo']);
