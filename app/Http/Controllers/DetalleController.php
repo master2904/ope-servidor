@@ -17,10 +17,14 @@ class DetalleController extends Controller
         return response()->json($lista,201);
         
     }
-
+    public function test($id){
+        $consulta=DB::select('SELECT e.id,e.nombre,e.cuenta,e.id_categoria,e.posicion,l.aula ,m.numero FROM maquinas m, laboratorios l, equipos e where m.id_laboratorio=l.id and e.id=m.id_equipo and e.id_categoria=:id',['id'=> $id]);
+        return response()->json($consulta);
+    }
     public function score($id){
         // $consulta=DB::select('SELECT e.id as id_eq,p.color,p.id as id_prob,d.tiempo,d.intento,d.estado FROM equipos e, problemas p, detalles d WHERE d.id_equipo=e.id and d.id_problema=p.id and e.id_categoria=:id order by e.id',['id'=> $id]);
-        $equipos=Equipo::select(['id','nombre','cuenta','id_categoria','posicion'])->where('id_categoria',$id)->get();
+        // $equipos=Equipo::select(['id','nombre','cuenta','id_categoria','posicion'])->where('id_categoria',$id)->get();
+        $equipos=DB::select('SELECT e.id,e.nombre,e.cuenta,e.id_categoria,e.posicion,l.aula ,m.numero FROM maquinas m, laboratorios l, equipos e where m.id_laboratorio=l.id and e.id=m.id_equipo and e.id_categoria=:id',['id'=> $id]);
         $problemas=Problema::select(['id','alias','color'])->where('id_categoria',$id)->orderby('alias')->get();
         $detalles=[];
         $i=0;

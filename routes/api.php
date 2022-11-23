@@ -30,6 +30,7 @@ Route::apiResource('/laboratorio', 'App\Http\Controllers\LaboratorioController')
 Route::apiResource('/maquina', 'App\Http\Controllers\MaquinaController');
 Route::apiResource('/problema', 'App\Http\Controllers\ProblemaController');
 Route::apiResource('/usuario', 'App\Http\Controllers\UsuarioController');
+Route::get('/detalle/test/{id}', [DetalleController::class,'test']);
 Route::post('/detalle/delete', [DetalleController::class,'delete']);
 Route::get('/equipo/buscar/{id}',[EquipoController::class,'buscar']);
 Route::put('/equipo/rango/{id}',[EquipoController::class,'rango']);
@@ -52,6 +53,7 @@ Route::get('/colegio/rconcurso/{id}',[ColegioController::class,'rep_concurso']);
 Route::get('/colegio/ganadores/{id}',[ColegioController::class,'rep_ganadores']);
 Route::get('/concurso/activo/{id}',[ConcursoController::class,'activo']);
 Route::get('/equipo/concurso/{id}', [EquipoController::class,'listar_concurso']);
+Route::get('/equipo/script/{id}', [EquipoController::class,'listar_script']);
 Route::get('/equipo/categoria/{id}', [EquipoController::class,'listar_concurso_categorias']);
 Route::get('/equipo/score/{id}', [EquipoController::class,'score']);
 Route::put('/equipo/finalizar/{id}', [EquipoController::class,'finalizar']);

@@ -22,7 +22,7 @@ class EquipoController extends Controller
     }
 
     public function store(Request $request)
-    {        
+    {
         $request->validate([           
             'nombre'=>'required',
             'id_colegio'=>'required',
@@ -133,9 +133,11 @@ class EquipoController extends Controller
     public function listar_concurso($id)
     {
         $consulta=DB::select('SELECT e.id,e.nombre,e.cuenta,e.clave,e.id_colegio,ca.titulo,co.color,ca.titulo,ca.id as id_categoria, co.nombre as colegio FROM colegios co, equipos e, categorias ca, concursos c WHERE e.id_colegio=co.codigo and e.id_categoria=ca.id and ca.id_concurso=c.id and c.id=:id and NOT EXISTS(SELECT * FROM maquinas m WHERE e.id = m.id_equipo) ORDER BY ca.id,e.id_colegio',['id'=> $id]);
-        // $consulta=DB::select('SELECT e.id,e.nombre,e.cuenta,e.clave,e.id_colegio,ca.titulo,co.color,ca.titulo,ca.id as id_categoria FROM colegios co, equipos e, categorias ca, concursos c WHERE e.id_colegio=co.id and e.id_categoria=ca.id and ca.id_concurso=c.id and c.id=:id and NOT EXISTS(SELECT * FROM maquinas m WHERE e.id = m.id_equipo) ORDER BY ca.id,e.id_colegio',['id'=> $id]);
-        
-        //     SELECT * FROM equipos e WHERE NOT EXISTS(SELECT * FROM maquinas m WHERE e.id = m.id_equipo)
+        return response()->json($consulta);
+    }    
+    public function listar_script($id)
+    {
+        $consulta=DB::select('SELECT e.id,e.nombre,e.cuenta,e.clave,e.id_colegio,ca.titulo,co.color,ca.titulo,ca.id as id_categoria, co.nombre as colegio FROM colegios co, equipos e, categorias ca, concursos c WHERE e.id_colegio=co.codigo and e.id_categoria=ca.id and ca.id_concurso=c.id and c.id=:id ORDER BY ca.id,e.id_colegio',['id'=> $id]);
         return response()->json($consulta);
     }    
     public function listar_concurso_categorias($id)

@@ -53,8 +53,8 @@ class UsuarioController extends Controller
     }
     public function store(Request $request){
         $validator = Validator::make($request->all(), [
-            'nombre' => 'required|string|max:25',
-            'apellido' => 'required|string|max:25',
+            'nombre' => 'required|string',
+            'apellido' => 'required|string',
             'rol' => 'required',
             'imagen'=>'required',
             'username' => 'required|string|max:25',
@@ -62,8 +62,9 @@ class UsuarioController extends Controller
             'password' => 'required|string|min:6|confirmed',
             ]);
         // $lista=User::where('username',$request->input('username'))->get();
-        //  if($lista)
-        //     return response()->json($lista);
+        // return response()->json(empty($lista));
+        // if(empty($lista))
+        //     return response()->json(['error' => 'Usuario existente'], 400);
         $user = User::create([
             'nombre' => $request->get('nombre'),
             'apellido' => $request->get('apellido'),
@@ -73,8 +74,9 @@ class UsuarioController extends Controller
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),
         ]);
-        $users = User::select("*")->orderBy("apellido", "asc")->get();
-        return response()->json($users,200);
+        return $this->index();
+        // $users = User::select("*")->orderBy("apellido", "asc")->get();
+        // return response()->json($users,200);
     }
     public function imageUpload(Request $request){
         $request->validate([
@@ -92,12 +94,7 @@ class UsuarioController extends Controller
         return response()->json(['image' => $imageName]);
     }
     public function image($nombre){
-        // $imagen=public_path('storage').'/usuario/'.$nombre;
-        // return $imagen;
-        // response()->download();
-        // return response()->image(public_path('storage').'/usuario/'.$nombre);
         return response()->download(public_path('storage').'/usuario/'.$nombre,$nombre);
-        // return response()->download(public_path('storage').'/usuario/'.$imagen,$imagen);
     }
     public  function descargar($nombre){
         $public_path = public_path();
@@ -138,20 +135,20 @@ class UsuarioController extends Controller
         $equipo['email']=$request->get('email');
         if($input['imagen']!="")
             $equipo['imagen']=$input['imagen'];
-            // return response()->json($equipo['imagen']);
-        // else
-            // return response()->json($input);
-            // $equipo['imagen']=$input['imagen'];
-        $clave=$request->get('password');
-        $equipo['password']=Hash::make($clave);
+        if($input['password']!=""){
+            $clave=$request->get('password');
+            $equipo['password']=Hash::make($clave);
+        }
         $equipo->save();
-        $users = User::select("*")->orderBy("apellido", "asc")->get();
-        return response()->json($users,200);
-        
+        return $this->index();
+        // $users = User::select("*")->orderBy("apellido", "asc")->get();
+        // return response()->json($users,200);
         // return response()->json(User::get(),200);
     }
     public function destroy ($id)
     {
+        if($id==1)
+            return response()->json(['error' => 'Super Usuario'], 400);
         User::find($id)->delete();
         // return response()->json(array('success'=>'Equipo Eliminado'));
         return response()->json(User::get(),200);

@@ -21,6 +21,8 @@ class CORS
         
         // header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token , Authorization');
         // return $next($request)->header("Access-Control-Allow-Origin", "*")->header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")->header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, X-Token-Auth, Authorization"); 
+        header("Access-Control-Allow-Origin", "localhost:4200");
+        // header("Access-Control-Allow-Origin", "192.168.0.19");
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Credentials: true");
         header("Access-Control-Max-Age: 1000");
