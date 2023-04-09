@@ -10,31 +10,26 @@ use App\Http\Controllers\ColegioController;
 use App\Http\Controllers\ConcursoController;
 use App\Http\Controllers\DetalleController;
 use App\Http\Controllers\ProblemaController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\EquipoController;
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-Route::apiResource('/categoria', 'App\Http\Controllers\CategoriaController');
-Route::apiResource('/colegio', 'App\Http\Controllers\ColegioController');
-Route::Resource('/concurso', 'App\Http\Controllers\ConcursoController');
+use App\Http\Controllers\TipoController;
+
+Route::apiResource('/cliente', 'App\Http\Controllers\ClienteController');
 Route::apiResource('/detalle', 'App\Http\Controllers\DetalleController');
-Route::apiResource('/equipo', 'App\Http\Controllers\EquipoController');
-Route::apiResource('/laboratorio', 'App\Http\Controllers\LaboratorioController');
+Route::apiResource('/producto', 'App\Http\Controllers\ProductController');
+Route::apiResource('/proveedor', 'App\Http\Controllers\VendorController');
+Route::apiResource('/usuario', 'App\Http\Controllers\UsuarioController');
+Route::apiResource('/venta', 'App\Http\Controllers\VentaController');
+Route::apiResource('/tipo', 'App\Http\Controllers\TipoController');
+Route::Resource('/concurso', 'App\Http\Controllers\ConcursoController');
 Route::apiResource('/maquina', 'App\Http\Controllers\MaquinaController');
 Route::apiResource('/problema', 'App\Http\Controllers\ProblemaController');
-Route::apiResource('/usuario', 'App\Http\Controllers\UsuarioController');
-Route::get('/detalle/test/{id}', [DetalleController::class,'test']);
+Route::get('/detalle/lista/{id}', [DetalleController::class,'listar']);
+Route::get('/tipo/lista/{id}', [TipoController::class,'listar']);
 Route::post('/detalle/delete', [DetalleController::class,'delete']);
 Route::get('/equipo/buscar/{id}',[EquipoController::class,'buscar']);
 Route::put('/equipo/rango/{id}',[EquipoController::class,'rango']);
-Route::get('/problema/buscar/{id}',[ProblemaController::class,'buscar']);
+Route::get('/detalle/venta/{id}',[DetalleController::class,'lista_venta']);
 Route::delete('/problema/eliminar/{id}/{n}',[ProblemaController::class,'eliminar']);
 Route::delete('/equipo/eliminar/{id}/{n}',[EquipoController::class,'eliminar']);
 Route::get('/categoria/buscar/{id}',[CategoriaController::class,'buscar']);
@@ -59,15 +54,16 @@ Route::get('/equipo/score/{id}', [EquipoController::class,'score']);
 Route::put('/equipo/finalizar/{id}', [EquipoController::class,'finalizar']);
 Route::get('/equipo/colegio/{id}', [EquipoController::class,'colegio']);
 Route::post('/equipo/lista', [EquipoController::class,'importar']);
-Route::get('/detalle/score/{id}', [DetalleController::class,'score']);
 Route::post('/laboratorio/imagen', [LaboratorioController::class,'imageUpload']);
 Route::post('/usuario/imagen', [UsuarioController::class,'imageUpload']);
-Route::post('/concurso/imagen',[ConcursoController::class,'subir']);
+Route::post('/producto/imagen', [ProductController::class,'imageUpload']);
+Route::get('/producto/detalle/{id}', [ProductController::class,'listado']);
+
 Route::get('/usuario/descargar/{master}',[UsuarioController::class,'image']);
 Route::post('/login', [UsuarioController::class,'authenticate']);
 // Route::get("usuario/imagen/{nombre}",[UsuarioController::class,'descargar']);
 Route::get("usuario/imagen/{imagen}",[UsuarioController::class,'image']);
-Route::get("concurso/imagen/{imagen}",[ConcursoController::class,'image']);
+Route::get("producto/imagen/{imagen}",[ProductController::class,'image']);
 Route::get("laboratorio/imagen/{imagen}",[LaboratorioController::class,'image']);
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('user','App\Http\Controllers\UsuarioController@getAuthenticatedUser');

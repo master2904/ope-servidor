@@ -132,7 +132,7 @@ class UsuarioController extends Controller
         $equipo['apellido']=$request->get('apellido');
         $equipo['username']=$request->get('username');
         $equipo['rol']=$request->get('rol');
-        $equipo['email']=$request->get('email');
+        // $equipo['email']=$request->get('email');
         if($input['imagen']!="")
             $equipo['imagen']=$input['imagen'];
         if($input['password']!=""){

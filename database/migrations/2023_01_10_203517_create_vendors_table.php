@@ -1,8 +1,10 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-class CreateEquiposTable extends Migration
+
+class CreateVendorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -11,17 +13,17 @@ class CreateEquiposTable extends Migration
      */
     public function up()
     {
-        Schema::create('equipos', function (Blueprint $table) {
+        Schema::create('vendors', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->integer('id_colegio');
-            $table->integer('id_categoria');
-            $table->string('cuenta');
-            $table->string('clave');
-            $table->integer('posicion');
-            $table->timestamps(); 
+            $table->string('apellido');
+            $table->string('empresa');
+            $table->string('celular');
+            $table->string('observacion');
+            $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -29,6 +31,6 @@ class CreateEquiposTable extends Migration
      */
     public function down()
     {
-        Schema::drop('equipos');
+        Schema::dropIfExists('vendors');
     }
 }

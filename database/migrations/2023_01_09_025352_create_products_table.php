@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateColegiosTable extends Migration
+class CreateProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,16 @@ class CreateColegiosTable extends Migration
      */
     public function up()
     {
-        Schema::create('colegios', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->integer('codigo');
             $table->string('nombre');
-            $table->string('color');
-            $table->timestamps(); 
+            $table->integer('lugar');
+            $table->string('imagen');
+            $table->timestamps();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('colegios');
+        Schema::dropIfExists('products');
     }
 }

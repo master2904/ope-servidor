@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateConcursosTable extends Migration
+class CreateVentasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateConcursosTable extends Migration
      */
     public function up()
     {
-        Schema::create('concursos', function (Blueprint $table) {
+        Schema::create('ventas', function (Blueprint $table) {
             $table->id();
-            $table->string('imagen');
-            $table->string('titulo');
-            $table->dateTime('fecha');
-            $table->integer('hora');
-            $table->integer('estado');
+            $table->integer('id_usuario');
+            $table->integer('id_detalle');
+            $table->integer('id_cliente');
+            $table->integer('cantidad');
+            $table->float('precio');
+            $table->date('fecha');
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateConcursosTable extends Migration
      */
     public function down()
     {
-        Schema::drop('concursos');
+        Schema::dropIfExists('ventas');
     }
 }

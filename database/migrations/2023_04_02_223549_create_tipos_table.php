@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLaboratoriosTable extends Migration
+class CreateTiposTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateLaboratoriosTable extends Migration
      */
     public function up()
     {
-        Schema::create('laboratorios', function (Blueprint $table) {
+        Schema::create('tipos', function (Blueprint $table) {
             $table->id();
-            $table->string('aula');
-            $table->string('jefe_labo');
-            $table->integer('maquinas');
-            $table->integer('columnas');
-            $table->string('imagen');      
+            $table->integer('id_producto');
+            $table->string('descripcion');            
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateLaboratoriosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('laboratorios');
+        Schema::dropIfExists('tipos');
     }
 }

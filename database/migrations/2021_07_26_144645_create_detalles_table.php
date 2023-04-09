@@ -15,11 +15,12 @@ class CreateDetallesTable extends Migration
     {
         Schema::create('detalles', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_problema');
-            $table->integer('id_equipo');
-            $table->integer('estado');
-            $table->integer('tiempo');
-            $table->integer('intento');
+            $table->integer('id_tipo');
+            $table->integer('codigo');
+            $table->integer('cantidad');
+            $table->float('precio_compra');
+            $table->float('precio_venta');
+            $table->integer('stock_minimo');
             $table->timestamps();
         });
     }
